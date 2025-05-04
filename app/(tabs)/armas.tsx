@@ -1,8 +1,8 @@
 import Abas from "@/components/ui/abas";
-import { suspeitos, suspeitosPb } from "@/constants/lists";
+import { armas, armasPb } from "@/constants/lists";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
-export default function HomeScreen() {
+export default function Armas() {
   return (
     <>
       <Image
@@ -14,7 +14,7 @@ export default function HomeScreen() {
       />
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
-          <Abas titulo="Suspeitos" lista={suspeitos} listaPb={suspeitosPb} />
+          <Abas titulo="Armas" lista={armas} listaPb={armasPb} />
         </ScrollView>
       </View>
     </>
