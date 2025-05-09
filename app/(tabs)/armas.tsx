@@ -1,5 +1,6 @@
 import Abas from "@/components/ui/abas";
 import { armas, armasPb } from "@/constants/lists";
+import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function Armas() {

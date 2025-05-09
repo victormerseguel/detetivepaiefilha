@@ -1,42 +1,56 @@
+import {
+  Entypo,
+  FontAwesome6,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarLabel: () => null,
+        tabBarActiveTintColor: "#feec5f",
+        tabBarInactiveTintColor: "#e8e8e8",
+        tabBarStyle: {
+          backgroundColor: "#599253",
+          borderColor: "transparent",
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Suspeitos",
-          // tabBarIcon: ({ color }) => (
-          //   <IconSymbol size={28} name="house.fill" color={color} />
-          // ),
+          tabBarIcon: ({ color }) => (
+            <FontAwesome6 name={"people-group"} size={25} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="armas"
         options={{
-          title: "Armas",
-          // tabBarIcon: ({ color }) => (
-          //   <IconSymbol size={28} name="paperplane.fill" color={color} />
-          // ),
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="pistol" size={33} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="locais"
         options={{
-          title: "Locais",
-          // tabBarIcon: ({ color }) => (
-          //   <IconSymbol size={28} name="paperplane.fill" color={color} />
-          // ),
+          tabBarIcon: ({ color }) => (
+            //   <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <Entypo name="location" size={25} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="confidencial"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="file-lock" size={33} color={color} />
+          ),
         }}
       />
     </Tabs>

@@ -18,7 +18,7 @@ export default function Abas({
 }: {
   titulo: string;
   lista: string[];
-  listaPb: string[];
+  listaPb?: string[];
 }) {
   const [cardPressed, setCardPressed] = useState<CardPressProps[]>(
     lista.map(() => ({ checked: false, cleared: false, question: false }))
@@ -59,69 +59,71 @@ export default function Abas({
   // if (!fontLoaded) return null;
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>{titulo}</Text>
-      <View style={styles.cards}>
-        {lista.map((item: any, indx: number) => (
-          <TouchableOpacity
-            key={item}
-            onPress={() => !cardPressed[indx].checked && onPress(indx)}
-            onLongPress={() => onLongPress(indx)}
-            style={styles.card}
-          >
-            <Image
-              source={
-                !cardPressed[indx].cleared
-                  ? item
-                  : !cardPressed[indx].checked
-                  ? listaPb[indx]
-                  : item
-              }
-              style={styles.image}
-            />
+      <View style={styles.wrapper}>
+        <View style={styles.cards}>
+          {lista.map((item: any, indx: number) => (
+            <TouchableOpacity
+              key={item}
+              onPress={() => !cardPressed[indx].checked && onPress(indx)}
+              onLongPress={() => onLongPress(indx)}
+              style={styles.card}
+            >
+              <Image
+                source={
+                  !cardPressed[indx].cleared
+                    ? item
+                    : !cardPressed[indx].checked
+                    ? listaPb && listaPb[indx]
+                    : item
+                }
+                style={styles.image}
+              />
 
-            {cardPressed[indx].checked && (
-              <Image
-                source={require("../../assets/images/check.png")}
-                style={[styles.image, styles.absolute, styles.checked]}
-              />
-            )}
-            {!cardPressed[indx].cleared && cardPressed[indx].question && (
-              <Image
-                source={require("../../assets/images/interrogacao.png")}
-                style={[styles.image, styles.absolute, styles.checked]}
-              />
-            )}
-            {!cardPressed[indx].checked && cardPressed[indx].cleared && (
-              <Image
-                source={require("../../assets/images/wrong.png")}
-                style={[styles.image, styles.absolute, styles.cleared]}
-              />
-            )}
-            {longCardPressed[indx] && (
-              <View style={[styles.absolute]}>
-                <TouchableOpacity
-                  style={styles.iconContainer}
-                  onPress={() => onIconPress(indx, "checked")}
-                >
-                  <Image
-                    source={require("../../assets/images/icon-check.png")}
-                    style={styles.iconCheck}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.iconContainer}
-                  onPress={() => onIconPress(indx, "question")}
-                >
-                  <Image
-                    source={require("../../assets/images/icon-interrogation.png")}
-                    style={styles.iconInterrogation}
-                  />
-                </TouchableOpacity>
-              </View>
-            )}
-          </TouchableOpacity>
-        ))}
+              {cardPressed[indx].checked && (
+                <Image
+                  source={require("../../assets/images/check.png")}
+                  style={[styles.image, styles.absolute, styles.checked]}
+                />
+              )}
+              {!cardPressed[indx].cleared && cardPressed[indx].question && (
+                <Image
+                  source={require("../../assets/images/interrogacao.png")}
+                  style={[styles.image, styles.absolute, styles.checked]}
+                />
+              )}
+              {!cardPressed[indx].checked && cardPressed[indx].cleared && (
+                <Image
+                  source={require("../../assets/images/wrong.png")}
+                  style={[styles.image, styles.absolute, styles.cleared]}
+                />
+              )}
+              {longCardPressed[indx] && (
+                <View style={[styles.absolute]}>
+                  <TouchableOpacity
+                    style={styles.iconContainer}
+                    onPress={() => onIconPress(indx, "checked")}
+                  >
+                    <Image
+                      source={require("../../assets/images/icon-check.png")}
+                      style={styles.iconCheck}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.iconContainer}
+                    onPress={() => onIconPress(indx, "question")}
+                  >
+                    <Image
+                      source={require("../../assets/images/icon-interrogation.png")}
+                      style={styles.iconInterrogation}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     </View>
   );
@@ -131,6 +133,8 @@ const imageWidth = 165;
 const imageHeight = imageWidth * 1.53;
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
+  wrapper: { flex: 1, justifyContent: "center", alignItems: "center" },
   cards: {
     flexDirection: "row",
     flexWrap: "wrap",
