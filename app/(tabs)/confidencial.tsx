@@ -1,4 +1,5 @@
 import Abas from "@/components/ui/abas";
+import { guilties } from "@/constants/lists";
 import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
@@ -16,11 +17,8 @@ export default function Armas() {
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
           <Abas
             titulo="Acusação"
-            lista={[
-              require("../../assets/images/susp_advogado.png"),
-              require("../../assets/images/local_banco.png"),
-              require("../../assets/images/arma_espingarda.png"),
-            ]}
+            listaPb={[]}
+            lista={guilties}
             acusacao={true}
           />
         </ScrollView>

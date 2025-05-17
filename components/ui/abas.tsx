@@ -1,3 +1,4 @@
+import { guilties } from "@/constants/lists";
 import { EvilIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -30,6 +31,13 @@ export default function Abas({
 
   useEffect(() => {
     setHasSomeCardChecked(cardPressed.some((card) => card.checked === true));
+    cardPressed.forEach((item, index) => {
+      item.checked
+        ? guilties.push(lista[index])
+        : guilties.filter((guilt) => {
+            guilt !== lista[index];
+          });
+    });
   }, [cardPressed]);
 
   const onPress = (index: number) => {
@@ -73,14 +81,14 @@ export default function Abas({
         <View style={styles.cards}>
           {lista.map((item: any, indx: number) => (
             <TouchableOpacity
-              key={item}
+              key={item + indx}
               onPress={() => !cardPressed[indx].checked && onPress(indx)}
               onLongPress={() => onLongPress(indx)}
               style={styles.card}
             >
               <Image
                 source={
-                  !cardPressed[indx].cleared &&
+                  !cardPressed[indx]?.cleared &&
                   (!hasSomeCardChecked || cardPressed[indx].checked)
                     ? item
                     : listaPb[indx]
@@ -88,19 +96,19 @@ export default function Abas({
                 style={styles.image}
               />
 
-              {cardPressed[indx].checked && (
+              {cardPressed[indx]?.checked && (
                 <Image
                   source={require("../../assets/images/check.png")}
                   style={[styles.image, styles.absolute, styles.checked]}
                 />
               )}
-              {!cardPressed[indx].cleared && cardPressed[indx].question && (
+              {!cardPressed[indx]?.cleared && cardPressed[indx]?.question && (
                 <Image
                   source={require("../../assets/images/interrogacao.png")}
                   style={[styles.image, styles.absolute, styles.checked]}
                 />
               )}
-              {!cardPressed[indx].checked && cardPressed[indx].cleared && (
+              {!cardPressed[indx]?.checked && cardPressed[indx]?.cleared && (
                 <Image
                   source={require("../../assets/images/wrong.png")}
                   style={[styles.image, styles.absolute, styles.cleared]}
