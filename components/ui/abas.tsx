@@ -1,5 +1,5 @@
 import { EvilIcons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type CardPressProps = {
@@ -16,7 +16,7 @@ export default function Abas({
 }: {
   titulo: string;
   lista: string[];
-  listaPb?: string[];
+  listaPb: string[];
   acusacao?: boolean;
 }) {
   const [cardPressed, setCardPressed] = useState<CardPressProps[]>(
@@ -26,8 +26,14 @@ export default function Abas({
     lista.map(() => false)
   );
 
+  const [hasSomeCardChecked, setHasSomeCardChecked] = useState(false);
+
+  useEffect(() => {
+    setHasSomeCardChecked(cardPressed.some((card) => card.checked === true));
+  }, [cardPressed]);
+
   const onPress = (index: number) => {
-    if (!acusacao) {
+    if (!acusacao && !hasSomeCardChecked) {
       const updatedState = [...cardPressed];
       updatedState[index].cleared = !updatedState[index].cleared;
       setCardPressed(updatedState);
@@ -35,7 +41,12 @@ export default function Abas({
   };
 
   const onLongPress = (index: number) => {
-    if (!acusacao) {
+    const cardChecked = !hasSomeCardChecked
+      ? true
+      : cardPressed[index].checked
+      ? true
+      : false;
+    if (!acusacao && cardChecked) {
       const longPressedUpdate = [...longCardPressed];
       longPressedUpdate[index] = !longPressedUpdate[index];
       setLongCardPressed(longPressedUpdate);
@@ -69,11 +80,10 @@ export default function Abas({
             >
               <Image
                 source={
-                  !cardPressed[indx].cleared
+                  !cardPressed[indx].cleared &&
+                  (!hasSomeCardChecked || cardPressed[indx].checked)
                     ? item
-                    : !cardPressed[indx].checked
-                    ? listaPb && listaPb[indx]
-                    : item
+                    : listaPb[indx]
                 }
                 style={styles.image}
               />

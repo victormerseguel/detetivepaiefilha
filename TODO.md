@@ -1,5 +1,5 @@
 - [] Otimizar as imagens tanto em tamanho de arquivos, quanto em desempenho dentro do app (cache)
-- [] Quando um card estiver checked, todos os outros tem de estar cleared
+- [x] Quando um card estiver checked, todos os outros tem de estar cleared
 - [] Quando um card estiver checked, precisa aparecer na aba de confidencial
 - [x] O ícone para aperecer ou esconder as cartas será o incognito MaterialCommunitIcons no vector-icons
 - [x] incluir um icone de "X" para fechar visualização de check e interrogação quando não se quer escolher nenhum destes
@@ -11,3 +11,5 @@
 - [] criar capas para cada categoria, para a tela inicial e de cartas escondidas
 
 - [] criar menu
+
+- [] criar icones check e question com uma barra para desmarcar.
