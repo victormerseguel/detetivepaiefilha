@@ -15,10 +15,12 @@ export default function Abas({
   titulo,
   lista,
   listaPb,
+  acusacao,
 }: {
   titulo: string;
   lista: string[];
   listaPb?: string[];
+  acusacao?: boolean;
 }) {
   const [cardPressed, setCardPressed] = useState<CardPressProps[]>(
     lista.map(() => ({ checked: false, cleared: false, question: false }))
@@ -32,15 +34,19 @@ export default function Abas({
   // });
 
   const onPress = (index: number) => {
-    const updatedState = [...cardPressed];
-    updatedState[index].cleared = !updatedState[index].cleared;
-    setCardPressed(updatedState);
+    if (!acusacao) {
+      const updatedState = [...cardPressed];
+      updatedState[index].cleared = !updatedState[index].cleared;
+      setCardPressed(updatedState);
+    }
   };
 
   const onLongPress = (index: number) => {
-    const longPressedUpdate = [...longCardPressed];
-    longPressedUpdate[index] = !longPressedUpdate[index];
-    setLongCardPressed(longPressedUpdate);
+    if (!acusacao) {
+      const longPressedUpdate = [...longCardPressed];
+      longPressedUpdate[index] = !longPressedUpdate[index];
+      setLongCardPressed(longPressedUpdate);
+    }
   };
 
   const onIconPress = (index: number, icon: keyof CardPressProps) => {
@@ -121,6 +127,14 @@ export default function Abas({
                   </TouchableOpacity>
                 </View>
               )}
+              {acusacao && (
+                <View style={styles.check}>
+                  <Image
+                    source={require("@/assets/images/icon-check.webp")}
+                    style={styles.checkImage}
+                  />
+                </View>
+              )}
             </TouchableOpacity>
           ))}
         </View>
@@ -131,6 +145,9 @@ export default function Abas({
 
 const imageWidth = 165;
 const imageHeight = imageWidth * 1.53;
+
+const checkWidth = 50;
+const checkHeight = checkWidth * 1.12;
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
@@ -193,5 +210,15 @@ const styles = StyleSheet.create({
   iconInterrogation: {
     width: "35%",
     height: "70%",
+  },
+  check: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    width: 50,
+  },
+  checkImage: {
+    width: checkWidth,
+    height: checkHeight,
   },
 });

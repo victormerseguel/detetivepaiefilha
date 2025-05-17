@@ -6,13 +6,15 @@ import { Image, ScrollView, StyleSheet, View } from "react-native";
 export default function HomeScreen() {
   return (
     <>
-      <Image
-        source={require("@/assets/images/background.png")}
-        style={{
-          flex: 1,
-          position: "absolute",
-        }}
-      />
+      <View style={styles.wrap}>
+        <Image
+          source={require("@/assets/images/background.png")}
+          style={{
+            flex: 1,
+            position: "absolute",
+          }}
+        />
+      </View>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
           <Abas titulo="Suspeitos" lista={suspeitos} listaPb={suspeitosPb} />
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     minHeight: "100%",
   },
-  wrap: {},
+  wrap: { flex: 1 },
   content: {
     flexGrow: 1,
     justifyContent: "center",

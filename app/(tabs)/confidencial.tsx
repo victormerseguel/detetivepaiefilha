@@ -21,6 +21,7 @@ export default function Armas() {
               require("../../assets/images/local_banco.png"),
               require("../../assets/images/arma_espingarda.png"),
             ]}
+            acusacao={true}
           />
         </ScrollView>
       </View>
