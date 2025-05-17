@@ -1,9 +1,6 @@
+import { EvilIcons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-// import {
-//   useFonts,
-//   Tagesschrift_400Regular,
-// } from "@expo-google-fonts/tagesschrift";
 
 type CardPressProps = {
   checked: boolean;
@@ -28,10 +25,6 @@ export default function Abas({
   const [longCardPressed, setLongCardPressed] = useState<boolean[]>(
     lista.map(() => false)
   );
-
-  // const [fontLoaded] = useFonts({
-  //   Tagesschrift: Tagesschrift_400Regular,
-  // });
 
   const onPress = (index: number) => {
     if (!acusacao) {
@@ -61,8 +54,6 @@ export default function Abas({
     setLongCardPressed(updatedlongCardPress);
     setCardPressed(updatedState);
   };
-
-  // if (!fontLoaded) return null;
 
   return (
     <View style={styles.container}>
@@ -124,6 +115,22 @@ export default function Abas({
                       source={require("../../assets/images/icon-interrogation.png")}
                       style={styles.iconInterrogation}
                     />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      backgroundColor: "transparent",
+                      borderRadius: "50%",
+                      top: 10,
+                      right: 10,
+                    }}
+                    onPress={() => {
+                      const longPressedUpdate = [...longCardPressed];
+                      longPressedUpdate[indx] = false;
+                      setLongCardPressed(longPressedUpdate);
+                    }}
+                  >
+                    <EvilIcons name="close-o" size={35} color={"#fff"} />
                   </TouchableOpacity>
                 </View>
               )}
