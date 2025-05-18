@@ -70,4 +70,4 @@ export const locaisPb = [
   require("../assets/images/local_restaurante_pb.webp"),
 ];
 
-export const guilties: any[] = [];
+export let guilties: any[] = [];

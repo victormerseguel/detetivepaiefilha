@@ -1,3 +1,4 @@
+import { ContextProvider } from "@/providers/context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -9,29 +10,31 @@ export default function RootLayout() {
   const [hideScreen, setHideScreen] = useState(false);
 
   return (
-    <View style={{ position: "relative", flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+    <ContextProvider>
+      <View style={{ position: "relative", flex: 1 }}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
 
-      {hideScreen && (
-        <View style={styles.ocultarScreen}>
-          <Text>Tela de OcultarBotao</Text>
-        </View>
-      )}
+        {hideScreen && (
+          <View style={styles.ocultarScreen}>
+            <Text>Tela de OcultarBotao</Text>
+          </View>
+        )}
 
-      <TouchableOpacity
-        style={styles.ocultarBotao}
-        onPress={() => setHideScreen(!hideScreen)}
-      >
-        <MaterialCommunityIcons
-          name={!hideScreen ? "incognito" : "incognito-off"}
-          size={33}
-          color={"#000"}
-        />
-      </TouchableOpacity>
-      <StatusBar style="light" />
-    </View>
+        <TouchableOpacity
+          style={styles.ocultarBotao}
+          onPress={() => setHideScreen(!hideScreen)}
+        >
+          <MaterialCommunityIcons
+            name={!hideScreen ? "incognito" : "incognito-off"}
+            size={33}
+            color={"#000"}
+          />
+        </TouchableOpacity>
+        <StatusBar style="light" />
+      </View>
+    </ContextProvider>
   );
 }
 

@@ -1,9 +1,11 @@
 import Abas from "@/components/ui/abas";
-import { guilties } from "@/constants/lists";
+import { useGlobalContext } from "@/providers/context";
 import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
-export default function Armas() {
+export default function Acusacao() {
+  const { data } = useGlobalContext();
+
   return (
     <>
       <Image
@@ -18,7 +20,7 @@ export default function Armas() {
           <Abas
             titulo="Acusação"
             listaPb={[]}
-            lista={guilties}
+            lista={data.guilties}
             acusacao={true}
           />
         </ScrollView>

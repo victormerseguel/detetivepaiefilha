@@ -1,4 +1,4 @@
-import { guilties } from "@/constants/lists";
+import { useGlobalContext } from "@/providers/context";
 import { EvilIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -27,16 +27,21 @@ export default function Abas({
     lista.map(() => false)
   );
 
+  const { data } = useGlobalContext();
+
   const [hasSomeCardChecked, setHasSomeCardChecked] = useState(false);
 
   useEffect(() => {
     setHasSomeCardChecked(cardPressed.some((card) => card.checked === true));
     cardPressed.forEach((item, index) => {
-      item.checked
-        ? guilties.push(lista[index])
-        : guilties.filter((guilt) => {
-            guilt !== lista[index];
-          });
+      if (item.checked) {
+        data.guilties.push(lista[index]);
+      } else {
+        const listWithoutItem = data.guilties.filter((guilt: any) => {
+          guilt !== lista[index];
+        });
+        data.guilties = listWithoutItem;
+      }
     });
   }, [cardPressed]);
 
@@ -89,7 +94,7 @@ export default function Abas({
               <Image
                 source={
                   !cardPressed[indx]?.cleared &&
-                  (!hasSomeCardChecked || cardPressed[indx].checked)
+                  (!hasSomeCardChecked || cardPressed[indx]?.checked)
                     ? item
                     : listaPb[indx]
                 }
