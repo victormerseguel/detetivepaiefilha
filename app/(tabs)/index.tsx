@@ -1,9 +1,12 @@
 import Abas from "@/components/ui/abas";
-import { suspeitos, suspeitosPb } from "@/constants/lists";
+import { useGlobalContext } from "@/providers/context";
 import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
+  const { data } = useGlobalContext();
+  const suspeitos = data.suspeitos.map((suspeito) => suspeito.img);
+  const suspeitosPb = data.suspeitos.map((suspeito) => suspeito.imgPb);
   return (
     <>
       <View style={styles.wrap}>

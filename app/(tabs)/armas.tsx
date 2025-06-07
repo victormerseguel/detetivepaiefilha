@@ -1,9 +1,12 @@
 import Abas from "@/components/ui/abas";
-import { armas, armasPb } from "@/constants/lists";
+import { useGlobalContext } from "@/providers/context";
 import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function Armas() {
+  const { data } = useGlobalContext();
+  const armas = data.armas.map((arma) => arma.img);
+  const armasPb = data.armas.map((arma) => arma.imgPb);
   return (
     <>
       <Image

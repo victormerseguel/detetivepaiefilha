@@ -1,7 +1,9 @@
 import { useContextStore } from "@/application/useContextStore";
 import { createContext, ReactNode, useContext } from "react";
 
-const Context = createContext<any>(undefined);
+const Context = createContext<ReturnType<typeof useContextStore> | undefined>(
+  undefined
+);
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const store = useContextStore();
