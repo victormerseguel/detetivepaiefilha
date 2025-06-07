@@ -1,9 +1,10 @@
+import Capas from "@/components/ui/capas";
 import { ContextProvider } from "@/providers/context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import "react-native-reanimated";
 
 export default function RootLayout() {
@@ -16,11 +17,7 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
 
-        {hideScreen && (
-          <View style={styles.ocultarScreen}>
-            <Text>Tela de OcultarBotao</Text>
-          </View>
-        )}
+        {hideScreen && <Capas setShowCover={setHideScreen} />}
 
         <TouchableOpacity
           style={styles.ocultarBotao}
@@ -59,11 +56,11 @@ const styles = StyleSheet.create({
   ocultarBotao: {
     backgroundColor: "#d8e0cd",
     position: "absolute",
-    bottom: 40,
+    bottom: 85,
     padding: 15,
     borderRadius: "50%",
     alignSelf: "center",
-    zIndex: 2,
+    zIndex: 1,
   },
   ocultarScreen: {
     ...StyleSheet.absoluteFillObject,
