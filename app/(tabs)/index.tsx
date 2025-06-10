@@ -4,9 +4,7 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function HomeScreen() {
-  const { data } = useGlobalContext();
-  const suspeitos = data.suspeitos.map((suspeito) => suspeito.img);
-  const suspeitosPb = data.suspeitos.map((suspeito) => suspeito.imgPb);
+  const { data, actions } = useGlobalContext();
   return (
     <>
       <View style={styles.wrap}>
@@ -20,7 +18,11 @@ export default function HomeScreen() {
       </View>
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
-          <Abas titulo="Suspeitos" lista={suspeitos} listaPb={suspeitosPb} />
+          <Abas
+            titulo="Suspeitos"
+            list={data.suspeitos}
+            setList={actions.setSuspeitos}
+          />
         </ScrollView>
       </View>
     </>

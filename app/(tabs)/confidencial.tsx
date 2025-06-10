@@ -4,7 +4,7 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function Acusacao() {
-  const { data } = useGlobalContext();
+  const { data, actions } = useGlobalContext();
 
   return (
     <>
@@ -19,8 +19,8 @@ export default function Acusacao() {
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
           <Abas
             titulo="Acusação"
-            listaPb={[]}
-            lista={data.guilties}
+            list={data.guilties}
+            setList={actions.setGuilties}
             acusacao={true}
           />
         </ScrollView>

@@ -1,7 +1,13 @@
-import { useGlobalContext } from "@/providers/context";
+import { CardList } from "@/constants/lists";
 import { EvilIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+const coverIndex = {
+  suspeitos: 0,
+  armas: 1,
+  locais: 2,
+};
 
 type CardPressProps = {
   checked: boolean;
@@ -11,72 +17,54 @@ type CardPressProps = {
 
 export default function Abas({
   titulo,
-  lista,
-  listaPb,
+  list,
+  setList,
   acusacao,
 }: {
   titulo: string;
-  lista: string[];
-  listaPb: string[];
+  list: CardList[];
+  setList: React.Dispatch<React.SetStateAction<CardList[]>>;
   acusacao?: boolean;
 }) {
-  const [cardPressed, setCardPressed] = useState<CardPressProps[]>(
-    lista.map(() => ({ checked: false, cleared: false, question: false }))
-  );
-  const [longCardPressed, setLongCardPressed] = useState<boolean[]>(
-    lista.map(() => false)
-  );
-
-  const { data } = useGlobalContext();
-
   const [hasSomeCardChecked, setHasSomeCardChecked] = useState(false);
 
   useEffect(() => {
-    setHasSomeCardChecked(cardPressed.some((card) => card.checked === true));
-    cardPressed.forEach((item, index) => {
-      if (item.checked) {
-        data.guilties.push(lista[index]);
-      } else {
-        const listWithoutItem = data.guilties.filter((guilt: any) => {
-          guilt !== lista[index];
-        });
-        data.guilties = listWithoutItem;
-      }
-    });
-  }, [cardPressed]);
+    setHasSomeCardChecked(list.some((card) => card.checked === true));
+  }, [list]);
 
   const onPress = (index: number) => {
     if (!acusacao && !hasSomeCardChecked) {
-      const updatedState = [...cardPressed];
+      const updatedState = [...list];
       updatedState[index].cleared = !updatedState[index].cleared;
-      setCardPressed(updatedState);
+      setList(updatedState);
     }
   };
 
   const onLongPress = (index: number) => {
     const cardChecked = !hasSomeCardChecked
       ? true
-      : cardPressed[index].checked
+      : list[index].checked
       ? true
       : false;
     if (!acusacao && cardChecked) {
-      const longPressedUpdate = [...longCardPressed];
-      longPressedUpdate[index] = !longPressedUpdate[index];
-      setLongCardPressed(longPressedUpdate);
+      setList((prevList) =>
+        prevList.map((card, idx) => ({
+          ...card,
+          longPressed: idx === index ? !card.longPressed : false,
+        }))
+      );
     }
   };
 
   const onIconPress = (index: number, icon: keyof CardPressProps) => {
-    const updatedState = [...cardPressed];
-    const updatedlongCardPress = [...longCardPressed];
+    const updatedState = [...list];
     const anotherIcon = icon === "checked" ? "question" : "checked";
     updatedState[index][icon] = !updatedState[index][icon];
     updatedState[index][anotherIcon] =
       updatedState[index][icon] === true && false;
-    updatedlongCardPress[index] = false;
+    updatedState[index].longPressed = false;
 
-    setLongCardPressed(updatedlongCardPress);
-    setCardPressed(updatedState);
+    setList(updatedState);
   };
 
   return (
@@ -84,42 +72,41 @@ export default function Abas({
       <Text style={styles.text}>{titulo}</Text>
       <View style={styles.wrapper}>
         <View style={styles.cards}>
-          {lista.map((item: any, indx: number) => (
+          {list.map((item: any, indx: number) => (
             <TouchableOpacity
-              key={item + indx}
-              onPress={() => !cardPressed[indx].checked && onPress(indx)}
+              key={item.name + indx}
+              onPress={() => !item.checked && onPress(indx)}
               onLongPress={() => onLongPress(indx)}
               style={styles.card}
             >
               <Image
                 source={
-                  !cardPressed[indx]?.cleared &&
-                  (!hasSomeCardChecked || cardPressed[indx]?.checked)
-                    ? item
-                    : listaPb[indx]
+                  !item?.cleared && (!hasSomeCardChecked || item?.checked)
+                    ? item.img
+                    : item.imgPb
                 }
                 style={styles.image}
               />
 
-              {cardPressed[indx]?.checked && (
+              {item?.checked && !acusacao && (
                 <Image
                   source={require("../../assets/images/check.png")}
                   style={[styles.image, styles.absolute, styles.checked]}
                 />
               )}
-              {!cardPressed[indx]?.cleared && cardPressed[indx]?.question && (
+              {!item?.cleared && item?.question && (
                 <Image
                   source={require("../../assets/images/interrogacao.png")}
                   style={[styles.image, styles.absolute, styles.checked]}
                 />
               )}
-              {!cardPressed[indx]?.checked && cardPressed[indx]?.cleared && (
+              {!item?.checked && item?.cleared && (
                 <Image
                   source={require("../../assets/images/wrong.png")}
                   style={[styles.image, styles.absolute, styles.cleared]}
                 />
               )}
-              {longCardPressed[indx] && (
+              {list[indx].longPressed && (
                 <View style={[styles.absolute]}>
                   <TouchableOpacity
                     style={styles.iconContainer}
@@ -127,7 +114,10 @@ export default function Abas({
                   >
                     <Image
                       source={require("../../assets/images/icon-check.png")}
-                      style={styles.iconCheck}
+                      style={[
+                        styles.iconCheck,
+                        item.checked ? { tintColor: "#b0b0b0" } : {},
+                      ]}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -136,7 +126,10 @@ export default function Abas({
                   >
                     <Image
                       source={require("../../assets/images/icon-interrogation.png")}
-                      style={styles.iconInterrogation}
+                      style={[
+                        styles.iconInterrogation,
+                        item.question ? { tintColor: "#b0b0b0" } : {},
+                      ]}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -148,16 +141,16 @@ export default function Abas({
                       right: 10,
                     }}
                     onPress={() => {
-                      const longPressedUpdate = [...longCardPressed];
-                      longPressedUpdate[indx] = false;
-                      setLongCardPressed(longPressedUpdate);
+                      const longPressedUpdate = [...list];
+                      longPressedUpdate[indx].longPressed = false;
+                      setList(longPressedUpdate);
                     }}
                   >
                     <EvilIcons name="close-o" size={35} color={"#fff"} />
                   </TouchableOpacity>
                 </View>
               )}
-              {acusacao && (
+              {acusacao && item?.checked && (
                 <View style={styles.check}>
                   <Image
                     source={require("@/assets/images/icon-check.webp")}
@@ -202,6 +195,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     opacity: 0.9,
     marginBottom: 25,
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
   },
   image: {
     width: imageWidth,

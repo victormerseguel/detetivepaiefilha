@@ -1,7 +1,11 @@
 import { useRouter } from "expo-router";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
-type RotaTabs = "/" | "/(tabs)/armas" | "/(tabs)/locais";
+type RotaTabs =
+  | "/"
+  | "/(tabs)/armas"
+  | "/(tabs)/locais"
+  | "/(tabs)/confidencial";
 
 interface Capas {
   img: any;
@@ -20,6 +24,10 @@ const capas: Capas[] = [
   {
     img: require("../../assets/images/capa_cartas_locais.png"),
     rota: "/(tabs)/locais",
+  },
+  {
+    img: require("../../assets/images/capa_cartas_acusados.png"),
+    rota: "/(tabs)/confidencial",
   },
 ];
 

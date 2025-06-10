@@ -1,4 +1,7 @@
 import Capas from "@/components/ui/capas";
+import { Menu } from "@/components/ui/menu";
+import { MenuButton } from "@/components/ui/menu-button";
+import { ResetAlert } from "@/components/ui/reset-alert";
 import { ContextProvider } from "@/providers/context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
@@ -8,7 +11,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import "react-native-reanimated";
 
 export default function RootLayout() {
-  const [hideScreen, setHideScreen] = useState(false);
+  const [hideScreen, setHideScreen] = useState(true);
 
   return (
     <ContextProvider>
@@ -16,6 +19,8 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
+
+        <MenuButton />
 
         {hideScreen && <Capas setShowCover={setHideScreen} />}
 
@@ -29,6 +34,10 @@ export default function RootLayout() {
             color={"#000"}
           />
         </TouchableOpacity>
+
+        <Menu />
+        <ResetAlert />
+
         <StatusBar style="light" />
       </View>
     </ContextProvider>
@@ -60,13 +69,18 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: "50%",
     alignSelf: "center",
-    zIndex: 1,
+    zIndex: 3,
   },
   ocultarScreen: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1,
+    zIndex: 3,
+  },
+  menuButton: {
+    position: "absolute",
+    top: 50,
+    right: 30,
   },
 });

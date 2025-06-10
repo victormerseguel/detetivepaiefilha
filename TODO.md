@@ -8,12 +8,12 @@
 - [x] adicionar um pequeno check nas cartas que estão em acusação
 - [x] criar tela quando esconder cartas (envelope do proprio jogo - confidencial)
 - [x] criar capas para cada categoria, para a tela inicial e de cartas escondidas
+- [x] quando um card estiver checked, precisa aparecer na aba de confidencial
+- [x] criar menu
+- [x] menu com a opção de reiniciar o jogo
+- [x] criar icones check e question com uma barra para desmarcar.
 
 - [] otimizar as imagens tanto em tamanho de arquivos, quanto em desempenho dentro do app (cache)
-- [] quando um card estiver checked, precisa aparecer na aba de confidencial
-- [] criar menu
-- [] menu com a opção de reiniciar o jogo
-- [] criar icones check e question com uma barra para desmarcar.
 
 ## V2
 

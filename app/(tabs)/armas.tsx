@@ -4,9 +4,7 @@ import React from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 
 export default function Armas() {
-  const { data } = useGlobalContext();
-  const armas = data.armas.map((arma) => arma.img);
-  const armasPb = data.armas.map((arma) => arma.imgPb);
+  const { data, actions } = useGlobalContext();
   return (
     <>
       <Image
@@ -18,7 +16,7 @@ export default function Armas() {
       />
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content} style={styles.wrap}>
-          <Abas titulo="Armas" lista={armas} listaPb={armasPb} />
+          <Abas titulo="Armas" list={data.armas} setList={actions.setArmas} />
         </ScrollView>
       </View>
     </>
