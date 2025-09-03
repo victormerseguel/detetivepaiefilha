@@ -1,50 +1,94 @@
-# Welcome to your Expo app 👋
+# 🎲 Detetive App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 🇧🇷 Português
+# 🎲 Detetive App
 
-## Get started
+Um aplicativo criado em **React Native com Expo** para facilitar a experiência dos jogadores no clássico jogo de tabuleiro **Detetive**.  
+Com ele, cada jogador pode anotar suas deduções de forma prática e organizada, tornando a partida mais fluida e imersiva.  
 
-1. Install dependencies
+---
+
+## ✨ Por que este projeto é especial?
+
+Este projeto vai além da técnica: foi desenvolvido ao lado da minha filha de 10 anos.  
+Ver sua empolgação com código, lógica e criação de ideias foi uma experiência inesquecível — transformar isso em algo real, juntos, é o que torna este projeto tão marcante para mim. ❤️  
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- React Native  
+- Expo  
+- JavaScript (ES6+)  
+- Styled Components (ou Tailwind, se estiver usando)  
+- Git/GitHub  
+
+---
+
+## 📚 O que pratiquei neste projeto
+
+Embora já trabalhe profissionalmente com **React e Next.js**, este projeto foi uma oportunidade para:  
+
+- Aplicar conceitos conhecidos em um novo contexto (React Native/Expo).  
+- Criar uma arquitetura de componentes adaptada para mobile.  
+- Explorar renderização condicional e gerenciamento de estado em dispositivos móveis.  
+- Exercitar a integração de boas práticas em usabilidade e experiência do usuário em outro ecossistema.  
+- Compartilhar conhecimento de forma colaborativa (ensinando e aprendendo com minha filha).  
+
+---
+
+## 🚀 Como rodar o projeto
+
+1. Instale as dependências:
 
    ```bash
    npm install
-   ```
 
-2. Start the app
+
+---
+---
+
+## 🇺🇸 English
+# 🎲 Detective App
+
+A **React Native + Expo** mobile application designed to enhance the experience of playing the classic board game **Clue (Detetive in Brazil)**.  
+With this app, each player can keep track of their notes in an organized way, making the game smoother and more immersive.  
+
+---
+
+## ✨ Why this project is special
+
+This project goes beyond technical development: it was built together with my 10-year-old daughter.  
+Seeing her excitement with coding, logical thinking, and turning her own ideas into features was an unforgettable experience.  
+Building this side by side made the project truly unique and meaningful. ❤️  
+
+---
+
+## 🛠️ Tech Stack
+
+- React Native  
+- Expo  
+- JavaScript (ES6+)  
+- Styled Components (or Tailwind, if used)  
+- Git/GitHub  
+
+---
+
+## 📚 What I practiced in this project
+
+Although I already work professionally with **React and Next.js**, this project was an opportunity to:  
+
+- Apply well-established concepts in a new context (React Native/Expo).  
+- Build a component-based architecture adapted for mobile.  
+- Explore conditional rendering and state management on mobile devices.  
+- Refine usability and user experience practices in a different ecosystem.  
+- Share knowledge in a collaborative way (teaching and learning with my daughter).  
+
+---
+
+## 🚀 Getting Started
+
+1. Install dependencies:
 
    ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   npm install
