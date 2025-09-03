@@ -1,5 +1,3 @@
-# 🎲 Detetive App
-
 ## 🇧🇷 Português
 # 🎲 Detetive App
 
